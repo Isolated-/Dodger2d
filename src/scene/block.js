@@ -35,7 +35,6 @@ class Block {
     if (!this.visible) return;
 
     this.y += this.speed * delta;
-    console.log(delta, this.speed, this.y);
 
     if (this.belowScreen()) {
       State.SCORE++;
