@@ -23,7 +23,7 @@ class Collectable extends GameObject {
 
     this.collected = false;
 
-    this.speedY = 0.8; // TODO: move to constant variable
+    this.speedY = State.SPEED; // TODO: move to constant variable
 
     this.type = GameObject.Type.Collectable;
   }

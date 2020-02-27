@@ -1,4 +1,4 @@
-class Block {
+class Block extends GameObject {
   static HEIGHT = 30;
   static WIDTH = 60;
 
@@ -7,15 +7,12 @@ class Block {
   static MIN_WIDTH = 30;
   static MAX_WIDTH = 50;
 
+  static COLOR = 'red';
+
   constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
+    super(x, y, width, height, GameObject.Type.Block, Block.COLOR);
 
-    this.height = height;
-    this.width = width;
-
-    this.speed = 0.2;
-    this.visible = true;
+    this.speedY = State.SPEED;
   }
 
   // factory method for creating blocks
@@ -29,28 +26,5 @@ class Block {
     const y = Math.floor(0 - height * 2);
 
     return new Block(x, y, width, height);
-  }
-
-  update(delta) {
-    if (!this.visible) return;
-
-    this.y += this.speed * delta;
-
-    if (this.belowScreen()) {
-      State.SCORE++;
-      this.visible = false;
-    }
-  }
-
-  belowScreen() {
-    return this.y > CANVAS.height + this.height;
-  }
-
-  render(ctx) {
-    if (!this.visible) return;
-
-    ctx.beginPath();
-    ctx.fillStyle = 'red';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 }

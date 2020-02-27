@@ -9,3 +9,4 @@ A super basic 2d game written in pure JavaScript.
 - Create objectives (collectable for additional points)
 - Encapsulate logic for reuse across games
 - Implement a better system for spawning objects
+- Implement different sizing in rows so player is forced to move around

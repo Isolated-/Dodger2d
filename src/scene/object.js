@@ -4,8 +4,8 @@ class GameObject {
   constructor(x, y, w, h, type = 'block', color = 'white') {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.w = Math.floor(w);
+    this.h = Math.floor(h);
     this.type = type;
     this.color = color;
 
@@ -37,6 +37,9 @@ class GameObject {
         this.visable = false;
       }
     }
+
+    this.x = Math.floor(this.x);
+    this.y = Math.floor(this.y);
   }
 
   render(ctx) {
