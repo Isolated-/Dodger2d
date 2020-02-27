@@ -77,6 +77,18 @@ class Game {
       );
     }
 
+    if (State.CurrentState === State.Paused) {
+      ctx.font = '20px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = GameColor.White;
+      ctx.fillText(GameString.Paused, centerOfScreenX, centerOfScreenY - 80);
+      ctx.fillText(
+        GameString.PausedInstructions,
+        centerOfScreenX,
+        centerOfScreenY - 50,
+      );
+    }
+
     if (this.state && State.CurrentState !== State.GameOver) {
       this.state.render();
     }

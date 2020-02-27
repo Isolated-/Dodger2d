@@ -44,7 +44,7 @@ class Player extends GameObject {
   }
 
   movement(delta) {
-    if (Keyboard.isDown(Keyboard.SPACE) || Mouse.isDown(Mouse.LEFT)) {
+    if (Mouse.isDown(Mouse.LEFT)) {
       this.x = this.pullLeft ? this.x + this.speedX : this.x - this.speedX;
     }
 
