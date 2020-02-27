@@ -3,7 +3,7 @@ class Player extends GameObject {
   static COLOR = ['#3498db', '#f1c40f', '#c0392b'];
   static MAX_HEALTH = 10;
 
-  constructor(x, y) {
+  constructor(x, y, pullLeft) {
     super(
       x,
       y,
@@ -16,6 +16,8 @@ class Player extends GameObject {
     this.speedY = State.SPEED;
     this.speedX = State.SPEED;
     this.health = 3;
+
+    this.pullLeft = pullLeft || random(0, 2);
   }
 
   healthLoss() {
@@ -43,7 +45,7 @@ class Player extends GameObject {
 
   movement(delta) {
     if (Keyboard.isDown(Keyboard.SPACE) || Mouse.isDown(Mouse.LEFT)) {
-      this.x -= this.speedX;
+      this.x = this.pullLeft ? this.x + this.speedX : this.x - this.speedX;
     }
 
     const maxHeight = CANVAS.height - this.h;
@@ -66,7 +68,7 @@ class Player extends GameObject {
     }
 
     if (Keyboard.noKeys() && Mouse.noKeys()) {
-      this.x += this.speedX;
+      this.x = this.pullLeft ? this.x - this.speedX : this.x + this.speedX;
     }
   }
 }
