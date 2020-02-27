@@ -33,6 +33,15 @@ class State {
       this.rows.push(new Row());
     }
 
+    /**
+     *  Garbage Collection
+     *  this creates a new array, removing any rows that are due to be deleted
+     *  this hopefully keeps the array to around 3/4 rows
+     *  as we depend on forEach this will avoid the array getting bigger than needed
+     *  meaning that the loop won't slow down as the array gets larger
+     */
+    this.rows = this.rows.filter(row => !row.delete);
+
     this.rows.forEach(row => {
       const collisionWith = row.collision(this.player);
 
