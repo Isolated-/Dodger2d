@@ -10,3 +10,4 @@ A super basic 2d game written in pure JavaScript.
 - Encapsulate logic for reuse across games
 - Implement a better system for spawning objects
 - Implement different sizing in rows so player is forced to move around
+- Implement more challenges for player, for example increase game speed over time till rediculous.
