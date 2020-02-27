@@ -21,14 +21,6 @@ class GameObject {
     const maxHeight = CANVAS.height - this.h;
     const maxWidth = CANVAS.width - this.w;
 
-    // check boundaries for the different types
-    if (this.type === GameObject.Type.Player) {
-      if (this.x < 0) this.x = 0;
-      if (this.y < 0) this.y = 0;
-      if (this.x > maxWidth) this.x = maxWidth;
-      if (this.y > maxHeight) this.y = maxHeight;
-    }
-
     if (this.type !== GameObject.Type.Player) {
       this.x += this.speedX;
       this.y += this.speedY;
