@@ -1,5 +1,6 @@
 class State {
   static SCORE = 0;
+  static HIGH_SCORE = 0;
 
   static SPEED = 4;
 
