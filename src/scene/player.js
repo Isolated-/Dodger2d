@@ -75,10 +75,6 @@ class Player extends GameObject {
 
     if (Keyboard.noKeys()) {
       this.x += this.speedX;
-
-      if (this.x < 0 || this.x > maxWidth) {
-        this.speedX = -this.speedX;
-      }
     }
   }
 }
