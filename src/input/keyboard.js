@@ -33,4 +33,8 @@ class Keyboard {
   static isDown(keyCode) {
     return Keyboard.keysDown[keyCode];
   }
+
+  static noKeys() {
+    return Keyboard.keysDown.filter(key => key === true).length === 0;
+  }
 }

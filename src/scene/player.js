@@ -13,8 +13,8 @@ class Player extends GameObject {
       Player.COLOR[0],
     );
 
-    this.speedY = 0.8;
-    this.speedX = 0.8;
+    this.speedY = State.SPEED;
+    this.speedX = State.SPEED;
     this.health = 3;
   }
 
@@ -39,19 +39,19 @@ class Player extends GameObject {
 
   movement(delta) {
     if (Keyboard.isDown(Keyboard.DOWN)) {
-      this.y += this.speedY * delta;
+      this.y += this.speedY;
     }
 
     if (Keyboard.isDown(Keyboard.UP)) {
-      this.y -= this.speedY * delta;
+      this.y -= this.speedY;
     }
 
     if (Keyboard.isDown(Keyboard.LEFT)) {
-      this.x -= this.speedX * delta;
+      this.x -= this.speedX;
     }
 
     if (Keyboard.isDown(Keyboard.RIGHT)) {
-      this.x += this.speedX * delta;
+      this.x += this.speedX;
     }
 
     const maxHeight = CANVAS.height - this.h;
@@ -71,6 +71,14 @@ class Player extends GameObject {
 
     if (this.y < 0) {
       this.y = 0;
+    }
+
+    if (Keyboard.noKeys()) {
+      this.x += this.speedX;
+
+      if (this.x < 0 || this.x > maxWidth) {
+        this.speedX = -this.speedX;
+      }
     }
   }
 }
