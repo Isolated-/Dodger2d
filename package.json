@@ -7,7 +7,8 @@
   "author": "Michael Palmer",
   "scripts": {
     "dev": "watchify init.js -o dist/dodger.js -s Dodger -v",
-    "build": "browserify init.js -o dist/dodger.js -s Dodger > dist/dodger.js"
+    "build": "browserify init.js -o dist/dodger.js -s Dodger > dist/dodger.js",
+    "test": "jest ./test"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
