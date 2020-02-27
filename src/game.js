@@ -48,31 +48,41 @@ class Game {
 
   render() {
     const ctx = this.ctx;
+
+    const centerOfScreenX = canvas.width / 2;
+    const centerOfScreenY = canvas.height / 2;
+
     ctx.textAlign = 'center';
 
     if (State.CurrentState === State.GameOver) {
-      ctx.fillStyle = 'red';
-      ctx.font = '20px sans-serif';
-      ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2);
+      if (State.SCORE >= State.HIGH_SCORE) {
+        ctx.font = '20px sans-serif';
+        ctx.fillStyle = GameColor.Green;
+        ctx.fillText(
+          GameString.NewHighScore,
+          centerOfScreenX,
+          centerOfScreenY / 2,
+        );
+
+        State.HIGH_SCORE = State.SCORE;
+      }
+
+      ctx.font = '18px sans-serif';
+      ctx.fillStyle = GameColor.Red;
+      ctx.fillText(GameString.GameOver, centerOfScreenX, centerOfScreenY);
       ctx.fillText(
-        'PRESS SPACE TO RESTART',
-        this.canvas.width / 2,
-        this.canvas.height / 2 + 20,
+        GameString.GameOverInstructions,
+        centerOfScreenX,
+        centerOfScreenY + 20,
       );
-      return;
     }
 
-    ctx.fillStyle = '#ecf0f1';
-
-    if (State.CurrentState === State.Paused) {
-      ctx.font = '16px sans-serif';
-      ctx.fillText('PAUSED', this.canvas.width / 2, this.canvas.height / 2);
-    }
-    ctx.font = '25px sans-serif';
-    ctx.fillText(`${State.SCORE}`, canvas.width / 2, 40);
-
-    if (this.state) {
+    if (this.state && State.CurrentState !== State.GameOver) {
       this.state.render();
     }
+
+    ctx.font = '26px sans-serif';
+    ctx.fillStyle = GameColor.White;
+    ctx.fillText(State.SCORE, centerOfScreenX, 40);
   }
 }
