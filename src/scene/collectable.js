@@ -5,7 +5,7 @@
  */
 class Collectable extends GameObject {
   static SIZE = 15;
-  static COLOR = ['purple', 'green'];
+  static COLOR = ['#402459', '#2ecc71'];
 
   static CollectableType = { Score: 0, Health: 1 };
 
