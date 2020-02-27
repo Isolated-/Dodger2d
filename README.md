@@ -16,3 +16,4 @@ A super basic 2d game written in pure JavaScript.
 - Add browserify, update init.js to reflect Dodger2d namespace
 - Restructure files into directories
 - Improve GameObject code (reduce the amount of type checking, move this to Player/Collectable/Block)
+- Add autobuild to Netify

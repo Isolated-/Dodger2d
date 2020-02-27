@@ -2,11 +2,16 @@
   "name": "dodger",
   "version": "0.1.0-alpha.0",
   "description": "A super basic 2d game written in pure JavaScript.",
-  "main": "index.js",
+  "main": "dist/dodger.js",
   "license": "MIT",
   "author": "Michael Palmer",
+  "scripts": {
+    "dev": "watchify init.js -o dist/dodger.js -s Dodger -v",
+    "build": "browserify init.js -o dist/dodger.js -s Dodger > dist/dodger.js"
+  },
   "devDependencies": {
     "browserify": "^16.5.0",
     "watchify": "^3.11.1"
-  }
+  },
+  "repository": "git@github.com:Isolated-/Dodger2d.git"
 }
