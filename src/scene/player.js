@@ -38,7 +38,7 @@ class Player extends GameObject {
   }
 
   movement(delta) {
-    if (Keyboard.isDown(Keyboard.SPACE)) {
+    if (Keyboard.isDown(Keyboard.SPACE) || Mouse.isDown(Mouse.LEFT)) {
       this.x -= this.speedX;
     }
 
@@ -61,7 +61,7 @@ class Player extends GameObject {
       this.y = 0;
     }
 
-    if (Keyboard.noKeys()) {
+    if (Keyboard.noKeys() && Mouse.noKeys()) {
       this.x += this.speedX;
     }
   }

@@ -49,8 +49,6 @@ class Collectable extends GameObject {
     const randomReward = reward || random(1, 5);
     const randomType = type || random(0, 2);
 
-    console.log(randomType);
-
     return new Collectable(pX, pY, randomReward, randomType);
   }
 }

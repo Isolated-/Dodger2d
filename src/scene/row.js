@@ -11,13 +11,15 @@ class Row {
     this.row = true;
 
     this.spawn();
+
+    this.delete = false;
   }
 
   /**
    *  Spawn the objects for the Row
    */
   spawn() {
-    let threshold = Player.SIZE * randomEx(0.8, 1.5);
+    let threshold = Player.SIZE * randomEx(1.0, 1.5);
 
     let blockWidth = CANVAS.width / 2 - threshold;
     let blockHeight = Block.HEIGHT;

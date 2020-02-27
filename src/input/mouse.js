@@ -13,7 +13,6 @@ class Mouse {
 
   onMouseDown(e) {
     if (this.listenFor.includes(e.button)) {
-      console.log('added');
       Mouse.buttonsPressed[e.button] = true;
     }
   }
@@ -26,5 +25,9 @@ class Mouse {
 
   static isDown(button) {
     return Mouse.buttonsPressed[button] ? true : false;
+  }
+
+  static noKeys() {
+    return Mouse.buttonsPressed.filter(button => button === true).length === 0;
   }
 }
