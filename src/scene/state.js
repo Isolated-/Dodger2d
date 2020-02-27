@@ -41,8 +41,12 @@ class State {
         const object = row.objects[collisionWith];
 
         if (object.type === GameObject.Type.Block && object.visable) {
-          this.gameOver = true;
-          this.player.visable = false;
+          this.player.healthLoss();
+          object.visable = false;
+
+          if (this.player.health <= 0) {
+            this.gameOver = true;
+          }
         }
 
         if (object.type === GameObject.Type.Collectable && !object.collected) {

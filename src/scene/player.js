@@ -1,12 +1,25 @@
 class Player extends GameObject {
   static SIZE = 30;
-  static COLOR = 'DeepSkyBlue';
+  static COLOR = ['DeepSkyBlue', 'yellow', 'red'];
 
   constructor(x, y) {
-    super(x, y, Player.SIZE, Player.SIZE, GameObject.Type.Player, Player.COLOR);
+    super(
+      x,
+      y,
+      Player.SIZE,
+      Player.SIZE,
+      GameObject.Type.Player,
+      Player.COLOR[0],
+    );
 
     this.speedY = 0.8;
     this.speedX = 0.8;
+    this.health = 3;
+  }
+
+  healthLoss() {
+    this.health--;
+    this.color = Player.COLOR[Player.COLOR.length - this.health];
   }
 
   movement(delta) {

@@ -13,6 +13,8 @@ class GameObject {
 
     this.speedX = 0.0;
     this.speedY = 0.0;
+
+    this.health = 0;
   }
 
   update(delta) {
