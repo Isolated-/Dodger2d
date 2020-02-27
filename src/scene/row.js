@@ -50,10 +50,32 @@ class Row {
   }
 
   update(delta) {
-    this.objects.forEach(object => object.update(delta));
+    if (this.delete) return;
+
+    let count = 0;
+    // simply loop over all objects in row (usually 2/3)
+    this.objects.forEach(object => {
+      // if the object is no longer visible, update count
+      if (!object.visable) {
+        count++;
+        return; // jump out of loop if no longer visible (reduce calls)
+      }
+
+      object.update(delta);
+    });
+
+    // if all objects are invisible
+    if (count >= this.objects.length) {
+      // mark for deletion within GameState
+      this.delete = true;
+
+      // empty object array
+      this.objects = [];
+    }
   }
 
   render(ctx) {
+    if (this.delete) return;
     this.objects.forEach(object => object.render(ctx));
   }
 
