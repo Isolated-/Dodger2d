@@ -51,7 +51,11 @@ class State {
 
         if (object.type === GameObject.Type.Collectable && !object.collected) {
           object.collected = true;
-          State.SCORE += object.score;
+          if (object.cType === Collectable.CollectableType.Score) {
+            State.SCORE += object.reward;
+          } else {
+            this.player.healthGain(object.reward);
+          }
           object.visable = false;
         }
       }

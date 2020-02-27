@@ -30,9 +30,7 @@ class Row {
     let chance = random(0, 1000);
 
     if (chance % 5 === 0) {
-      this.objects.push(
-        new Collectable(CANVAS.width / 2 - 10, -50, random(0, 10)),
-      );
+      this.objects.push(Collectable.create(CANVAS.width / 2 - 10, -50));
     }
   }
 

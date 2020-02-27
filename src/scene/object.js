@@ -43,5 +43,13 @@ class GameObject {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.w, this.h);
+
+    // render health if type === player
+    if (this.type === GameObject.Type.Player) {
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'right';
+      ctx.fillText(`health: ${this.health}`, CANVAS.width - 10, 20);
+    }
   }
 }

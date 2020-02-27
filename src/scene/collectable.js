@@ -5,27 +5,29 @@
  */
 class Collectable extends GameObject {
   static SIZE = 15;
-  static COLOR = 'purple';
+  static COLOR = ['purple', 'green'];
 
-  constructor(x, y, score) {
+  static CollectableType = { Score: 0, Health: 1 };
+
+  constructor(x, y, reward, type = Collectable.CollectableType.Score) {
+    console.log(type);
     super(
       x,
       y,
       Collectable.SIZE,
       Collectable.SIZE,
       GameObject.Type.Collectable,
-      Collectable.COLOR,
+      Collectable.COLOR[type],
     );
 
     this.x = x;
     this.y = y;
-    this.score = score;
+    this.reward = reward;
 
     this.collected = false;
 
-    this.speedY = State.SPEED; // TODO: move to constant variable
-
-    this.type = GameObject.Type.Collectable;
+    this.speedY = State.SPEED;
+    this.cType = type;
   }
 
   /**
@@ -33,18 +35,22 @@ class Collectable extends GameObject {
    *
    *  Removes the need for parameters as will randomise.
    *
-   *  @param {number} score
    *  @param {number} x
    *  @param {number} y
+   *  @param {Collectable.CollectableType} type
+   *  @param {number} reward
    *
    *  @return {Collectable}
    */
-  static create(score, x, y) {
+  static create(x, y, type, reward) {
     const pX = x || random(0, CANVAS.width);
     const pY = y || 0 - Collectable.SIZE * 2;
 
-    const randomScore = score || random(1, 10);
+    const randomReward = reward || random(1, 5);
+    const randomType = type || random(0, 2);
 
-    return new Collectable(pX, pY, randomScore);
+    console.log(randomType);
+
+    return new Collectable(pX, pY, randomReward, randomType);
   }
 }
