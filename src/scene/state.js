@@ -2,47 +2,51 @@ class State {
   static SCORE = 0;
 
   constructor() {
-    this.blocks = [];
-
     const canvas = CANVAS;
     this.ctx = canvas.getContext('2d');
 
-    const posX = canvas.width / 2 - 20 / 2;
-    const posY = canvas.height - 20 * 1.5;
+    const posX = canvas.width / 2 - Player.SIZE / 2;
+    const posY = canvas.height - Player.SIZE * 1.5;
 
     this.player = new Player(posX, posY);
 
     this.gameOver = false;
 
     this.updates = 0;
-  }
 
-  spawnBlock() {
-    this.blocks.push(Block.create());
+    this.objects = [Collectable.create()];
   }
 
   update(delta) {
-    if (this.updates % 50 === 0) {
-      this.spawnBlock();
-    }
-
-    let blocks = this.blocks;
-
     this.updates++;
-    blocks.forEach((block, id) => {
-      if (Collision.rectangle(this.player, block) && block.visible) {
-        this.gameOver = true;
-        Game.STOPPED = true;
+
+    this.objects.forEach(object => {
+      // check collision
+      if (Collision.rectangle(this.player, object) && object.visable) {
+        if (object.type === GameObject.Type.Collectable && !object.collected) {
+          object.collected = true;
+          State.SCORE += object.score;
+          object.visable = false;
+        }
+
+        if (object.type === GameObject.Type.Block) {
+          this.gameOver = true;
+          this.player.visable = false;
+        }
       }
 
-      block.update(delta);
+      // call each objects update function
+      object.update(delta);
     });
 
+    // TODO: set this.objects to mapped array removing non-visable components
+
     this.player.update(delta);
+    this.player.movement(delta);
   }
 
   render() {
     this.player.render(this.ctx);
-    this.blocks.forEach(block => block.render(this.ctx));
+    this.objects.forEach(object => object.render(this.ctx));
   }
 }
