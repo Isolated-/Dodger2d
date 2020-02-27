@@ -55,7 +55,7 @@ class State {
         const object = row.objects[collisionWith];
 
         if (object.type === GameObject.Type.Block && object.visable) {
-          this.player.healthLoss();
+          this.player.healthLoss(object.damage);
           object.visable = false;
 
           if (this.player.health <= 0) {

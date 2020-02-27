@@ -19,17 +19,24 @@ class Row {
    *  Spawn the objects for the Row
    */
   spawn() {
-    let threshold = Player.SIZE * randomEx(1.0, 1.5);
+    const threshold = Player.SIZE * randomEx(1.0, 1.5);
+    const blockWidth = CANVAS.width / 2 - threshold;
+    const blockHeight = Block.HEIGHT;
 
-    let blockWidth = CANVAS.width / 2 - threshold;
-    let blockHeight = Block.HEIGHT;
+    const damage = random(1, 2);
 
     this.objects.push(
-      new Block(0, -60, blockWidth, blockHeight),
-      new Block(CANVAS.width - blockWidth, -60, blockWidth, blockHeight),
+      new Block(0, -60, blockWidth, blockHeight, damage),
+      new Block(
+        CANVAS.width - blockWidth,
+        -60,
+        blockWidth,
+        blockHeight,
+        damage,
+      ),
     );
 
-    let chance = random(0, 1000);
+    const chance = random(0, 1000);
 
     if (chance % 5 === 0) {
       this.objects.push(Collectable.create(CANVAS.width / 2 - 10, -50));
