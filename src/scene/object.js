@@ -29,6 +29,10 @@ class GameObject {
 
       if (this.y > maxHeight) {
         this.visable = false;
+
+        if (this.type === GameObject.Type.Block) {
+          State.SCORE++;
+        }
       }
     }
 
