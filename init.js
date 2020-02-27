@@ -68,9 +68,9 @@ function update() {
       canvas.height - 10,
     );
 
-    context.fillStyle = 'black';
+    context.fillStyle = '#ecf0f1';
     context.textAlign = 'center';
-    context.font = '20px sans-serif';
+    context.font = '25px sans-serif';
     context.fillText(`${State.SCORE}`, canvas.width / 2, 40);
 
     requestAnimationFrame(frame);

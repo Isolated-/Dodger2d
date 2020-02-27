@@ -1,6 +1,6 @@
 class Player extends GameObject {
   static SIZE = 30;
-  static COLOR = ['DeepSkyBlue', 'yellow', 'red'];
+  static COLOR = ['#3498db', '#f1c40f', '#c0392b'];
   static MAX_HEALTH = 10;
 
   constructor(x, y) {
@@ -20,9 +20,8 @@ class Player extends GameObject {
 
   healthLoss() {
     this.health--;
-    if (this.health <= 3) {
-      this.color = Player.COLOR[Player.COLOR.length - this.health];
-    }
+
+    this._setPlayerColor();
   }
 
   healthGain(amount) {
@@ -30,11 +29,16 @@ class Player extends GameObject {
 
     this.health += amount;
 
-    if (this.health >= 3) {
+    this._setPlayerColor();
+  }
+
+  _setPlayerColor() {
+    if (this.health >= Player.COLOR.length) {
       this.color = Player.COLOR[0];
-    } else {
-      this.color = Player.COLOR[Player.COLOR.length - this.health];
+      return;
     }
+
+    this.color = Player.COLOR[Player.COLOR.length - this.health];
   }
 
   movement(delta) {

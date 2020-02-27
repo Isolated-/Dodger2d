@@ -33,7 +33,7 @@ class Game {
     }
 
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle = '#eeeeee';
+    ctx.fillStyle = '#2c3e50';
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.state.render();

@@ -15,3 +15,4 @@ A super basic 2d game written in pure JavaScript.
 - Improve game loop, add pausing, resetting, stopping etc..
 - Add a menu overlay, or atleast instructions before starting
 - Implement shooting, when circle hits block it removes it, add yellow collectables - bullets
+- Make blocks of different types that remove X health per hit
