@@ -7,7 +7,7 @@ class Block extends GameObject {
   static MIN_WIDTH = 30;
   static MAX_WIDTH = 50;
 
-  static COLOR = 'red';
+  static COLOR = '#8e44ad';
 
   constructor(x, y, width, height) {
     super(x, y, width, height, GameObject.Type.Block, Block.COLOR);
