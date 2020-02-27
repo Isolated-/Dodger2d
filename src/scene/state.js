@@ -3,6 +3,13 @@ class State {
 
   static SPEED = 4;
 
+  static Paused = 0;
+  static Running = 1;
+  static Stopped = 2;
+  static GameOver = 3;
+
+  static CurrentState = State.Stopped;
+
   constructor() {
     const canvas = CANVAS;
     this.ctx = canvas.getContext('2d');
@@ -21,6 +28,8 @@ class State {
   }
 
   update(delta) {
+    if (State.CurrentState !== State.Running) return;
+
     this.updates++;
 
     if (this.updates >= 50) {
@@ -37,6 +46,7 @@ class State {
      */
     this.rows = this.rows.filter(row => !row.delete);
 
+    // TODO: clean this up, what a mess
     this.rows.forEach(row => {
       const collisionWith = row.collision(this.player);
 
@@ -49,7 +59,7 @@ class State {
           object.visable = false;
 
           if (this.player.health <= 0) {
-            this.gameOver = true;
+            State.CurrentState = State.GameOver;
           }
         }
 
