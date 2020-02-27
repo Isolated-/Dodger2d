@@ -7,11 +7,11 @@ function init() {
 
   canvas.width = 300;
   canvas.height = 600;
+  canvas.style = 'background: #2c3e50;';
 
   context = canvas.getContext('2d');
 
   game = new Game(canvas);
-
   update();
 }
 
@@ -26,7 +26,7 @@ function update() {
     delta;
 
   function frame(timestamp) {
-    if (Game.STOPPED) return;
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
     delta = timestamp - last;
     dt += delta;
@@ -67,11 +67,6 @@ function update() {
       canvas.width - 5,
       canvas.height - 10,
     );
-
-    context.fillStyle = '#ecf0f1';
-    context.textAlign = 'center';
-    context.font = '25px sans-serif';
-    context.fillText(`${State.SCORE}`, canvas.width / 2, 40);
 
     requestAnimationFrame(frame);
   }
