@@ -41,13 +41,21 @@ class State {
         const object = row.objects[collisionWith];
 
         if (object.type === GameObject.Type.Block && object.visable) {
-          this.gameOver = true;
-          this.player.visable = false;
+          this.player.healthLoss();
+          object.visable = false;
+
+          if (this.player.health <= 0) {
+            this.gameOver = true;
+          }
         }
 
         if (object.type === GameObject.Type.Collectable && !object.collected) {
           object.collected = true;
-          State.SCORE += object.score;
+          if (object.cType === Collectable.CollectableType.Score) {
+            State.SCORE += object.reward;
+          } else {
+            this.player.healthGain(object.reward);
+          }
           object.visable = false;
         }
       }

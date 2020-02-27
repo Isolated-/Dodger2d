@@ -3,6 +3,7 @@ class Keyboard {
   static RIGHT = 39;
   static UP = 38;
   static DOWN = 40;
+  static SPACE = 32;
 
   static keysDown = [];
 
@@ -15,6 +16,7 @@ class Keyboard {
       Keyboard.RIGHT,
       Keyboard.UP,
       Keyboard.DOWN,
+      Keyboard.SPACE,
     ];
   }
 
@@ -32,5 +34,9 @@ class Keyboard {
 
   static isDown(keyCode) {
     return Keyboard.keysDown[keyCode];
+  }
+
+  static noKeys() {
+    return Keyboard.keysDown.filter(key => key === true).length === 0;
   }
 }

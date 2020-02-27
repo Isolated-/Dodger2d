@@ -13,12 +13,14 @@ class GameObject {
 
     this.speedX = 0.0;
     this.speedY = 0.0;
+
+    this.health = 0;
   }
 
   update(delta) {
     if (!this.visable) return;
 
-    const maxHeight = CANVAS.height - this.h;
+    const maxHeight = CANVAS.height;
     const maxWidth = CANVAS.width - this.w;
 
     if (this.type !== GameObject.Type.Player) {
@@ -27,6 +29,10 @@ class GameObject {
 
       if (this.y > maxHeight) {
         this.visable = false;
+
+        if (this.type === GameObject.Type.Block) {
+          State.SCORE++;
+        }
       }
     }
 
@@ -41,5 +47,13 @@ class GameObject {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.w, this.h);
+
+    // render health if type === player
+    if (this.type === GameObject.Type.Player) {
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'right';
+      ctx.fillText(`health: ${this.health}`, CANVAS.width - 10, 20);
+    }
   }
 }
