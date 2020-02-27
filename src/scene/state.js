@@ -9,15 +9,10 @@ class State {
 
     const posX = canvas.width / 2 - Player.SIZE / 2;
     const posY = canvas.height - Player.SIZE * 1.5;
-
     this.player = new Player(posX, posY);
 
     this.gameOver = false;
-
     this.updates = 0;
-
-    this.objects = [Row.create()];
-
     this.rows = [Row.create()];
   }
 
