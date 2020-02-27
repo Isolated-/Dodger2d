@@ -38,20 +38,8 @@ class Player extends GameObject {
   }
 
   movement(delta) {
-    if (Keyboard.isDown(Keyboard.DOWN)) {
-      this.y += this.speedY;
-    }
-
-    if (Keyboard.isDown(Keyboard.UP)) {
-      this.y -= this.speedY;
-    }
-
-    if (Keyboard.isDown(Keyboard.LEFT)) {
+    if (Keyboard.isDown(Keyboard.SPACE)) {
       this.x -= this.speedX;
-    }
-
-    if (Keyboard.isDown(Keyboard.RIGHT)) {
-      this.x += this.speedX;
     }
 
     const maxHeight = CANVAS.height - this.h;

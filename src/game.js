@@ -7,6 +7,7 @@ class Game {
 
     this.state = new State(canvas);
     this.keyboard = new Keyboard();
+    this.mouse = new Mouse();
   }
 
   update(delta) {
