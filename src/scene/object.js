@@ -4,8 +4,8 @@ class GameObject {
   constructor(x, y, w, h, type = 'block', color = 'white') {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.w = Math.floor(w);
+    this.h = Math.floor(h);
     this.type = type;
     this.color = color;
 
@@ -13,21 +13,15 @@ class GameObject {
 
     this.speedX = 0.0;
     this.speedY = 0.0;
+
+    this.health = 0;
   }
 
   update(delta) {
     if (!this.visable) return;
 
-    const maxHeight = CANVAS.height - this.h;
+    const maxHeight = CANVAS.height;
     const maxWidth = CANVAS.width - this.w;
-
-    // check boundaries for the different types
-    if (this.type === GameObject.Type.Player) {
-      if (this.x < 0) this.x = 0;
-      if (this.y < 0) this.y = 0;
-      if (this.x > maxWidth) this.x = maxWidth;
-      if (this.y > maxHeight) this.y = maxHeight;
-    }
 
     if (this.type !== GameObject.Type.Player) {
       this.x += this.speedX;
@@ -35,8 +29,15 @@ class GameObject {
 
       if (this.y > maxHeight) {
         this.visable = false;
+
+        if (this.type === GameObject.Type.Block) {
+          State.SCORE++;
+        }
       }
     }
+
+    this.x = Math.floor(this.x);
+    this.y = Math.floor(this.y);
   }
 
   render(ctx) {
@@ -46,5 +47,13 @@ class GameObject {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.w, this.h);
+
+    // render health if type === player
+    if (this.type === GameObject.Type.Player) {
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'right';
+      ctx.fillText(`health: ${this.health}`, CANVAS.width - 10, 20);
+    }
   }
 }
