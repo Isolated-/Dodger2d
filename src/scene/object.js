@@ -52,8 +52,9 @@ class GameObject {
     if (this.type === GameObject.Type.Player) {
       ctx.font = '15px sans-serif';
       ctx.fillStyle = 'black';
-      ctx.textAlign = 'right';
-      ctx.fillText(`health: ${this.health}`, CANVAS.width - 10, 20);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${this.health}`, this.x + 15, this.y + 15);
     }
   }
 }
