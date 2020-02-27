@@ -20,8 +20,8 @@ class Player extends GameObject {
     this.pullLeft = pullLeft || random(0, 2);
   }
 
-  healthLoss() {
-    this.health--;
+  healthLoss(amount) {
+    this.health -= amount;
 
     this._setPlayerColor();
   }

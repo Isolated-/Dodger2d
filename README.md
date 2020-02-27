@@ -9,4 +9,4 @@ A super basic 2d game written in pure JavaScript.
 - Implement more challenges for player, for example increase game speed over time till rediculous.
 - Touch support (mobile)
 - Implement shooting, when circle hits block it removes it, add yellow collectables - bullets
-- Make blocks of different types that remove X health per hit
+- Implement best score
