@@ -1,0 +1,50 @@
+class GameObject {
+  static Type = { Player: 0, Block: 1, Collectable: 2 };
+
+  constructor(x, y, w, h, type = 'block', color = 'white') {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.type = type;
+    this.color = color;
+
+    this.visable = true;
+
+    this.speedX = 0.0;
+    this.speedY = 0.0;
+  }
+
+  update(delta) {
+    if (!this.visable) return;
+
+    const maxHeight = CANVAS.height - this.h;
+    const maxWidth = CANVAS.width - this.w;
+
+    // check boundaries for the different types
+    if (this.type === GameObject.Type.Player) {
+      if (this.x < 0) this.x = 0;
+      if (this.y < 0) this.y = 0;
+      if (this.x > maxWidth) this.x = maxWidth;
+      if (this.y > maxHeight) this.y = maxHeight;
+    }
+
+    if (this.type !== GameObject.Type.Player) {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.y > maxHeight) {
+        this.visable = false;
+      }
+    }
+  }
+
+  render(ctx) {
+    if (!this.visable) return;
+
+    // maybe use ctx.save() ctx.restore()
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+  }
+}
