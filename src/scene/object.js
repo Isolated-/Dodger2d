@@ -20,7 +20,7 @@ class GameObject {
   update(delta) {
     if (!this.visable) return;
 
-    const maxHeight = CANVAS.height - this.h;
+    const maxHeight = CANVAS.height;
     const maxWidth = CANVAS.width - this.w;
 
     if (this.type !== GameObject.Type.Player) {
