@@ -17,3 +17,9 @@ A super basic 2d game written in pure JavaScript.
 - Restructure files into directories
 - Improve GameObject code (reduce the amount of type checking, move this to Player/Collectable/Block)
 - Add autobuild to Netify
+
+## Implementation Notes
+
+### GameObjects
+
+Everything on screen (except text) is a GameObject, these can be 1 of three types: Block, Collectable, Character. Essentially these are just Rectangles when rendered.
