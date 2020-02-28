@@ -23,3 +23,5 @@ A super basic 2d game written in pure JavaScript.
 ### GameObjects
 
 Everything on screen (except text) is a GameObject, these can be 1 of three types: Block, Collectable, Character. Essentially these are just Rectangles when rendered.
+
+GameObjects will require a GameObjectRenderer in order to render them on screen, however this may be added in later versions.

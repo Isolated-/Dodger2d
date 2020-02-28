@@ -6,8 +6,8 @@
   "license": "MIT",
   "author": "Michael Palmer",
   "scripts": {
-    "dev": "watchify init.js -o dist/dodger.js -s Dodger -v",
-    "build": "browserify init.js -o dist/dodger.js -s Dodger > dist/dodger.js",
+    "dev": "watchify lib/index.js -o dist/dodger.js -s Dodger -v",
+    "build": "browserify lib/index.js -o dist/dodger.js -s Dodger > dist/dodger.js",
     "test": "jest ./test"
   },
   "devDependencies": {
