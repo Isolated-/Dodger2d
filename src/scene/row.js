@@ -5,14 +5,20 @@
 class Row {
   static PER_ROW = 3;
 
+  static CollectableSpawnRate = 0.33;
+  static HardScoreThreshold = 50;
+
   constructor() {
     this.objects = [];
 
     this.row = true;
 
-    this.spawn();
-
     this.delete = false;
+    this.collectableSpawnRate = Row.CollectableSpawnRate;
+    this.scoreThreshold = Row.HardScoreThreshold;
+    this.maxCollectableSpawnRate = 0.5; // 50%
+
+    this.spawn();
   }
 
   /**
@@ -23,7 +29,12 @@ class Row {
     const blockWidth = CANVAS.width / 2 - threshold;
     const blockHeight = Block.HEIGHT;
 
-    const damage = random(1, 2);
+    let damage = random(1, 2);
+
+    // don't spawn red blocks until score >= 50
+    if (State.SCORE <= Row.HardScoreThreshold) {
+      damage = 1;
+    }
 
     this.objects.push(
       new Block(0, -60, blockWidth, blockHeight, damage),
@@ -36,9 +47,17 @@ class Row {
       ),
     );
 
-    const chance = random(0, 1000);
+    const chance = Math.random();
 
-    if (chance % 5 === 0) {
+    if (
+      State.SCORE >= this.scoreThreshold &&
+      this.collectableSpawnRate < this.maxCollectableSpawnRate
+    ) {
+      this.collectableSpawnRate += 0.001;
+    }
+
+    if (chance < this.collectableSpawnRate) {
+      // 33% chance of spawn
       this.objects.push(Collectable.create(CANVAS.width / 2 - 10, -50));
     }
   }
