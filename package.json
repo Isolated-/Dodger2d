@@ -4,5 +4,16 @@
   "description": "A super basic 2d game written in pure JavaScript.",
   "main": "index.js",
   "license": "MIT",
-  "author": "Michael Palmer"
+  "author": "Michael Palmer",
+  "scripts": {
+    "dev": "watchify lib/index.ts -p tsify --standalone Dodger > dist/dodger2d.js -o dist/dodger2d.js -v",
+    "build": "browserify lib/index.ts  -p tsify --standalone Dodger > dist/dodger2d.js"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "jest": "^25.1.0",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.2",
+    "watchify": "^3.11.1"
+  }
 }
