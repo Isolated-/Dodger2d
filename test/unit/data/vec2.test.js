@@ -37,17 +37,6 @@ describe('Vec2 unit test', () => {
       expect(next.x).toBe(15);
       expect(next.y).toBe(15);
     });
-
-    test('should throw error (x/y undefined)', () => {
-      const vec1 = new Vec2(10, 10);
-      const vec2 = new Vec2(20, 20);
-
-      let error = () => vec1.add(undefined, vec2.y);
-      expect(error).toThrow();
-
-      error = () => vec1.add(vec2.x, undefined);
-      expect(error).toThrow();
-    });
   });
 
   describe('#.sub(x, y)', () => {
@@ -70,17 +59,6 @@ describe('Vec2 unit test', () => {
 
       expect(next.x).toBe(20);
       expect(next.y).toBe(20);
-    });
-
-    test('should throw error (x/y undefined)', () => {
-      const vec1 = new Vec2(1, 1);
-      const vec2 = new Vec2(10, 10);
-
-      let error = () => vec1.sub(undefined, 10);
-      expect(error).toThrow();
-
-      error = () => vec1.sub(10, undefined);
-      expect(error).toThrow();
     });
   });
 });
