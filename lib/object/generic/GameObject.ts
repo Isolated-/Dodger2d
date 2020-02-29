@@ -36,9 +36,4 @@ export abstract class GameObject implements IGameObject {
     this.visible = true;
     this.color = color;
   }
-
-  update(delta: number) {
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
-  }
 }
