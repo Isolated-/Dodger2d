@@ -12,3 +12,5 @@ export { GameObject } from './object/generic/GameObject';
 export { GameObjectType } from './object/generic/GameObjectType';
 export { GameObjectRenderer } from './visual/GameObjectRenderer';
 export { GameObjectUpdater } from './logic/GameObjectUpdater';
+export { GameObjectCollisionDetector } from './logic/GameObjectCollisionDetector';
+export { GameObjectBoundaryDetector } from './logic/GameObjectBoundaryDetector';
