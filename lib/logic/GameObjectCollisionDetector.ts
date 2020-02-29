@@ -2,9 +2,7 @@ import { GameObject } from '../object/generic/GameObject';
 import { Detector } from './generic/Detector';
 
 export class GameObjectCollisionDetector extends Detector<GameObject> {
-  detect(object: GameObject, objects: GameObject[]): boolean {
-    const object1 = objects[0];
-
+  detect(object: GameObject, object1: GameObject): boolean {
     if (object1 && object1 instanceof GameObject) {
       return this.rectangle(object, object1);
     }
