@@ -2,6 +2,13 @@
  *  Exports all the dependencies ready for use as a library/module
  */
 
-export function sayHello(name) {
-  return `Hello, ${name}`;
-}
+export { Vec2 } from './data/Vec2';
+
+/**
+ *  GameObject
+ */
+export { IGameObject } from './object/generic/interface/IGameObject';
+export { GameObject } from './object/generic/GameObject';
+export { GameObjectType } from './object/generic/GameObjectType';
+export { GameObjectRenderer } from './visual/GameObjectRenderer';
+export { GameObjectUpdater } from './logic/GameObjectUpdater';
