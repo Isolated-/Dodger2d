@@ -39,7 +39,7 @@ class CharacterUpdater extends Dodger.GameObjectUpdater {
           break;
         }
 
-        case Type.OffScreenRight: {
+        case Type.OnScreenEdgeRight: {
           object.position.x = CANVAS.width - object.width;
           break;
         }
