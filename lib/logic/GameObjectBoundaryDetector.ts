@@ -16,8 +16,8 @@ export class GameObjectBoundaryDetector extends Detector<GameObject> {
 
   detect(
     object: GameObject,
-    canvasHeight: number,
     canvasWidth: number,
+    canvasHeight: number,
   ): number {
     const x = object.position.x,
       y = object.position.y;
