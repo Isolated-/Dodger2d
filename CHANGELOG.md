@@ -4,6 +4,8 @@
 
 # Version [0.1.0.alpha.1]
 
+This version focuses on refactoring the existing codebase into a more robust library that can be reused in future.
+
 ### Improvement
 
 - Objects are now spawned with a specific rate, this rate is increased overtime until it reaches 50%.
