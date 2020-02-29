@@ -8,6 +8,13 @@
 
 - Objects are now spawned with a specific rate, this rate is increased overtime until it reaches 50%.
 
+### Added
+
+- Reusable components encapsulated into TypeScript library. The abstractions should help enforce single responsibility on classes/objects.
+  - Detector - Responsible for logic focusing on detection (collision/boundaries/etc)
+  - Updater - Responsible for updating an object (movement/etc)
+  - Renderer - Responible for rending an object onto screen
+
 # Version [0.1.0.alpha.0] - 2020-02-28
 
 ### Added
