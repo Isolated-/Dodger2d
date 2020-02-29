@@ -1,3 +1,3 @@
 export interface IDetector<T> {
-  collision(object: T, object2: T): void;
+  detect(object: T, ...params: any): void | boolean | number;
 }
