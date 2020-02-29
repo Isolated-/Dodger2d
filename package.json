@@ -7,11 +7,14 @@
   "author": "Michael Palmer",
   "scripts": {
     "dev": "watchify lib/index.ts -p tsify --standalone Dodger > dist/dodger2d.js -o dist/dodger2d.js -v",
-    "build": "browserify lib/index.ts  -p tsify --standalone Dodger > dist/dodger2d.js"
+    "build": "browserify lib/index.ts  -p tsify --standalone Dodger > dist/dodger2d.js",
+    "test:lib": "jest ./test/lib"
   },
   "devDependencies": {
+    "@types/jest": "^25.1.3",
     "browserify": "^16.5.0",
     "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
     "tsify": "^4.0.1",
     "typescript": "^3.8.2",
     "watchify": "^3.11.1"
