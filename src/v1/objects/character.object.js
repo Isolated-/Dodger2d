@@ -25,6 +25,10 @@ class Character extends Dodger.GameObject {
     this.direction = direction || random(0, 2);
     this.health = 3; // TODO: random this?
 
-    this.velocity.x = direction ? 0.8 : -0.8;
+    this.velocity.x = direction ? 4 : -4;
+  }
+
+  isDead() {
+    return this.health <= 0;
   }
 }
