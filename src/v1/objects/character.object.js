@@ -31,4 +31,37 @@ class Character extends Dodger.GameObject {
   isDead() {
     return this.health <= 0;
   }
+
+  getHealth() {
+    return this.health;
+  }
+
+  addHealth(amount) {
+    if (this.health + amount > Character.MaxHealth) {
+      this.health = Character.MaxHealth;
+      this._setPlayerColor();
+      return;
+    }
+
+    this.health += amount;
+    this._setPlayerColor();
+  }
+
+  subHealth(amount) {
+    this.health -= amount;
+    this._setPlayerColor();
+  }
+
+  /**
+   *  Sets a player color based on health value
+   *  @internal
+   */
+  _setPlayerColor() {
+    if (this.health >= Player.COLOR.length) {
+      this.color = Player.COLOR[0];
+      return;
+    }
+
+    this.color = Player.COLOR[Player.COLOR.length - this.health];
+  }
 }
