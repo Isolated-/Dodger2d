@@ -14,3 +14,10 @@ export { GameObjectRenderer } from './visual/GameObjectRenderer';
 export { GameObjectUpdater } from './logic/GameObjectUpdater';
 export { GameObjectCollisionDetector } from './logic/GameObjectCollisionDetector';
 export { GameObjectBoundaryDetector } from './logic/GameObjectBoundaryDetector';
+
+/**
+ *  GameText
+ */
+export { IGameText } from './object/generic/interface/IGameText';
+export { GameText } from './object/GameText';
+export { GameTextRenderer } from './visual/GameTextRenderer';
