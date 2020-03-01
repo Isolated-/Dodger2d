@@ -57,11 +57,11 @@ class Character extends Dodger.GameObject {
    *  @internal
    */
   _setPlayerColor() {
-    if (this.health >= Player.COLOR.length) {
-      this.color = Player.COLOR[0];
+    if (this.health >= Character.Colors.length) {
+      this.color = Character.Colors[0];
       return;
     }
 
-    this.color = Player.COLOR[Player.COLOR.length - this.health];
+    this.color = Character.Colors[Character.Colors.length - this.health];
   }
 }
