@@ -16,7 +16,7 @@ export abstract class GameObject implements IGameObject {
 
   type: number;
 
-  private visible: boolean;
+  visible: boolean;
 
   constructor(
     x: number,
