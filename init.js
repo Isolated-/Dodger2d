@@ -2,6 +2,10 @@ let game;
 let canvas;
 let context;
 
+let updater;
+let renderer;
+let textRenderer;
+
 function init() {
   canvas = document.querySelector('canvas');
 
@@ -12,6 +16,11 @@ function init() {
   context = canvas.getContext('2d');
 
   game = new Game(canvas);
+
+  updater = new GameUpdater();
+  renderer = new GameRenderer(context);
+  textRenderer = new Dodger.GameTextRenderer(context);
+
   update();
 }
 
@@ -41,32 +50,37 @@ function update() {
       updated = true;
       updates++;
 
-      game.update(dt);
+      updater.update(game);
     }
 
     if (updated) {
-      game.render();
+      renderer.render(game);
       renders++;
     }
 
-    context.font = '10px sans-serif';
-    context.fillStyle = 'red';
-    context.textAlign = 'right';
-    context.fillText(
-      `${Math.round(fps)} fps`,
-      canvas.width - 5,
-      canvas.height - 30,
-    );
-    context.fillText(
-      `${updates} updates`,
-      canvas.width - 5,
-      canvas.height - 20,
-    );
-    context.fillText(
-      `${renders} renders`,
-      canvas.width - 5,
-      canvas.height - 10,
-    );
+    if (DEBUG) {
+      const updaterText = new Dodger.GameTextBuilder(`${updates} updates`)
+        .setPosition(canvas.width - 5, canvas.height - 10)
+        .setColor('red')
+        .setTextAlign('right')
+        .build();
+
+      const renderText = new Dodger.GameTextBuilder(`${renders} renders`)
+        .setPosition(canvas.width - 5, canvas.height - 20)
+        .setColor('red')
+        .setTextAlign('right')
+        .build();
+
+      const fpsText = new Dodger.GameTextBuilder(`${Math.round(fps)} fps`)
+        .setPosition(canvas.width - 5, canvas.height - 30)
+        .setColor('red')
+        .setTextAlign('right')
+        .build();
+
+      textRenderer.render(fpsText);
+      textRenderer.render(updaterText);
+      textRenderer.render(renderText);
+    }
 
     requestAnimationFrame(frame);
   }
