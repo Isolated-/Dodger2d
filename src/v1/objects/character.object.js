@@ -40,18 +40,12 @@ class Character extends Dodger.GameObject {
     const maxHealth =
       State.SCORE >= 50 ? Character.MaxHealth[1] : Character.MaxHealth[0];
 
-    if (this.health + amount > maxHealth) {
-      this.health = maxHealth;
-      this._setPlayerColor();
-      return;
-    }
-
-    this.health += amount;
+    this.health = amount > maxHealth ? maxHealth : this.health + amount;
     this._setPlayerColor();
   }
 
   subHealth(amount) {
-    this.health -= amount;
+    this.health = amount < 0 ? 0 : this.health - amount;
     this._setPlayerColor();
   }
 

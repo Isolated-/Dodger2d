@@ -1,4 +1,4 @@
-class Player extends GameObject {
+class Player extends Dodger.GameObject {
   static SIZE = 30;
   static COLOR = ['#3498db', '#f1c40f', '#c0392b'];
   static MAX_HEALTH = 10;
@@ -9,7 +9,7 @@ class Player extends GameObject {
       y,
       Player.SIZE,
       Player.SIZE,
-      GameObject.Type.Player,
+      Dodger.GameObjectType.Character,
       Player.COLOR[0],
     );
 

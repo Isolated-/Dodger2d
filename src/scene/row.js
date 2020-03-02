@@ -1,6 +1,8 @@
 /**
  *  A row is created every X seconds
  *  includes: 2 blocks, 1 collectable (chance of spawning)
+ *
+ *  TODO: clean this class up
  */
 class Row {
   static PER_ROW = 3;
@@ -18,6 +20,13 @@ class Row {
     this.scoreThreshold = Row.HardScoreThreshold;
     this.maxCollectableSpawnRate = 0.5; // 50%
 
+    this.objectRenderer = new Dodger.GameObjectRenderer(
+      CANVAS.getContext('2d'),
+    );
+
+    this.objectUpdater = new ObjectUpdater();
+    this.collisionDetector = new Dodger.GameObjectCollisionDetector();
+
     this.spawn();
   }
 
@@ -25,7 +34,7 @@ class Row {
    *  Spawn the objects for the Row
    */
   spawn() {
-    const threshold = Player.SIZE * randomEx(1.0, 1.5);
+    const threshold = Character.Size * randomEx(1.0, 1.5);
     const blockWidth = CANVAS.width / 2 - threshold;
     const blockHeight = Block.HEIGHT;
 
@@ -62,19 +71,6 @@ class Row {
     }
   }
 
-  collision(entity) {
-    let hasCollision = false;
-
-    this.objects.forEach((object, id) => {
-      if (Collision.rectangle(entity, object)) {
-        hasCollision = id;
-        return;
-      }
-    });
-
-    return hasCollision;
-  }
-
   update(delta) {
     if (this.delete) return;
 
@@ -82,12 +78,12 @@ class Row {
     // simply loop over all objects in row (usually 2/3)
     this.objects.forEach(object => {
       // if the object is no longer visible, update count
-      if (!object.visable) {
+      if (!object.visible) {
         count++;
         return; // jump out of loop if no longer visible (reduce calls)
       }
 
-      object.update(delta);
+      this.objectUpdater.update(object, delta);
     });
 
     // if all objects are invisible
@@ -100,9 +96,30 @@ class Row {
     }
   }
 
+  isOffScreen() {
+    return this.delete;
+  }
+
+  hasCollision(object) {
+    let foundId;
+
+    this.objects.forEach((object1, id) => {
+      if (this.collisionDetector.detect(object, object1)) {
+        foundId = id;
+        return;
+      }
+    });
+
+    return foundId;
+  }
+
   render(ctx) {
     if (this.delete) return;
-    this.objects.forEach(object => object.render(ctx));
+
+    this.objects.forEach(object => {
+      if (!object.visible) return;
+      this.objectRenderer.render(object);
+    });
   }
 
   static create() {

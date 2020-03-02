@@ -1,6 +1,6 @@
 # Dodger2d - CHANGELOG
 
-\*Version: **0.1.0-alpha.0\***
+\*Version: **0.1.0-alpha.1\***
 
 # Version [0.1.0.alpha.1]
 
@@ -9,6 +9,9 @@ This version focuses on refactoring the existing codebase into a more robust lib
 ### Improvement
 
 - Objects are now spawned with a specific rate, this rate is increased overtime until it reaches 50%.
+- GameObjects (Character/Block/Collectables) now updated to use Detector/Updater/Renderer pattern
+- Game/GameState has been improved, using Updater/Renderer pattern
+- Score is now increased each time a row reaches the bottom, instead of per object reaching bottom
 
 ### Added
 
@@ -16,6 +19,7 @@ This version focuses on refactoring the existing codebase into a more robust lib
   - Detector - Responsible for logic focusing on detection (collision/boundaries/etc)
   - Updater - Responsible for updating an object (movement/etc)
   - Renderer - Responible for rending an object onto screen
+- GameText added, with Renderer
 
 # Version [0.1.0.alpha.0] - 2020-02-28
 

@@ -8,6 +8,8 @@ class Game {
     this.keyboard = new Keyboard();
     this.mouse = new Mouse();
 
+    this.gameTextRenderer = new Dodger.GameTextRenderer(this.ctx);
+
     this.start();
   }
 
@@ -67,26 +69,44 @@ class Game {
         State.HIGH_SCORE = State.SCORE;
       }
 
-      ctx.font = '18px sans-serif';
-      ctx.fillStyle = GameColor.Red;
-      ctx.fillText(GameString.GameOver, centerOfScreenX, centerOfScreenY);
-      ctx.fillText(
+      const gameOver = new Dodger.GameText(
+        GameString.GameOver,
+        centerOfScreenX,
+        centerOfScreenY,
+        GameColor.Red,
+        18,
+      );
+
+      const gameOverInstructions = new Dodger.GameText(
         GameString.GameOverInstructions,
         centerOfScreenX,
         centerOfScreenY + 20,
+        GameColor.Red,
+        18,
       );
+
+      this.gameTextRenderer.render(gameOver);
+      this.gameTextRenderer.render(gameOverInstructions);
     }
 
     if (State.CurrentState === State.Paused) {
-      ctx.font = '20px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillStyle = GameColor.White;
-      ctx.fillText(GameString.Paused, centerOfScreenX, centerOfScreenY - 80);
-      ctx.fillText(
+      const pausedText = new Dodger.GameText(
+        GameString.Paused,
+        centerOfScreenX,
+        centerOfScreenY - 80,
+        GameColor.White,
+        20,
+      );
+
+      const pausedTextInstructions = new Dodger.GameText(
         GameString.PausedInstructions,
         centerOfScreenX,
         centerOfScreenY - 50,
+        20,
       );
+
+      this.gameTextRenderer.render(pausedText);
+      this.gameTextRenderer.render(pausedTextInstructions);
     }
 
     if (this.state && State.CurrentState !== State.GameOver) {

@@ -15,13 +15,16 @@ class State {
     const canvas = CANVAS;
     this.ctx = canvas.getContext('2d');
 
-    const posX = canvas.width / 2 - Player.SIZE / 2;
-    const posY = canvas.height - Player.SIZE * 1.5;
-    this.player = new Player(posX, posY);
+    const posX = canvas.width / 2 - Character.Size / 2;
+    const posY = canvas.height - Character.Size * 1.5;
 
     this.gameOver = false;
     this.updates = 0;
     this.rows = [Row.create()];
+
+    this.character = new Character(posX, posY);
+    this.characterUpdater = new CharacterUpdater();
+    this.characterRenderer = new CharacterRenderer(this.ctx);
   }
 
   increaseGameSpeed() {
@@ -33,9 +36,15 @@ class State {
 
     this.updates++;
 
+    // TODO: make time based
     if (this.updates >= 50) {
       this.updates = 0;
       this.rows.push(new Row());
+    }
+
+    if (this.character.isDead()) {
+      State.CurrentState = State.GameOver;
+      return;
     }
 
     /**
@@ -47,43 +56,49 @@ class State {
      */
     this.rows = this.rows.filter(row => !row.delete);
 
-    // TODO: clean this up, what a mess
     this.rows.forEach(row => {
-      const collisionWith = row.collision(this.player);
+      const collisionWith = row.hasCollision(this.character);
 
-      if (collisionWith !== false) {
-        // false = 0, confuses index !== false works
+      if (collisionWith !== undefined) {
         const object = row.objects[collisionWith];
 
-        if (object.type === GameObject.Type.Block && object.visable) {
-          this.player.healthLoss(object.damage);
-          object.visable = false;
-
-          if (this.player.health <= 0) {
-            State.CurrentState = State.GameOver;
-          }
+        if (object.type === Dodger.GameObjectType.Block && object.visible) {
+          this.character.subHealth(object.damage || 1);
+          object.visible = false;
         }
 
-        if (object.type === GameObject.Type.Collectable && !object.collected) {
+        if (
+          object.type === Dodger.GameObjectType.Collectable &&
+          !object.collected
+        ) {
           object.collected = true;
-          if (object.cType === Collectable.CollectableType.Score) {
-            State.SCORE += object.reward;
-          } else {
-            this.player.healthGain(object.reward);
+
+          switch (object.cType) {
+            case Collectable.CollectableType.Score: {
+              State.SCORE += object.reward;
+              break;
+            }
+            case Collectable.CollectableType.Health: {
+              this.character.addHealth(object.reward);
+              break;
+            }
+            default: {
+              console.log('unknown collectable type');
+            }
           }
-          object.visable = false;
+
+          object.visible = false;
         }
       }
 
       row.update(delta);
     });
 
-    this.player.update(delta);
-    this.player.movement(delta);
+    this.characterUpdater.update(this.character, delta);
   }
 
   render() {
-    this.player.render(this.ctx);
+    this.characterRenderer.render(this.character);
     this.rows.forEach(row => row.render(this.ctx));
   }
 }

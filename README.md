@@ -10,12 +10,16 @@ A super basic 2d game written in pure JavaScript.
 - Touch support (mobile)
 - Implement shooting, when circle hits block it removes it, add yellow collectables - bullets
 
+- Array support for Renderers/Updaters
+- Research design patterns
+
 ## Refactor
 
 - Remove all ctx references, replace with util function
 - Add browserify, update init.js to reflect Dodger2d namespace
 - Restructure files into directories
 - Improve GameObject code (reduce the amount of type checking, move this to Player/Collectable/Block)
+- A lot of code is tightly coupled together
 
 ## Implementation
 

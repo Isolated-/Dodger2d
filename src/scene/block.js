@@ -1,4 +1,4 @@
-class Block extends GameObject {
+class Block extends Dodger.GameObject {
   static HEIGHT = 30;
   static WIDTH = 60;
 
@@ -12,25 +12,10 @@ class Block extends GameObject {
   constructor(x, y, width, height, damage) {
     const color = damage === 1 ? Block.COLOR[0] : Block.COLOR[1];
 
-    super(x, y, width, height, GameObject.Type.Block, color);
+    super(x, y, width, height, Dodger.GameObjectType.Block, color);
 
-    this.speedY = State.SPEED;
+    this.velocity.y += 4;
 
     this.damage = damage || 1;
-  }
-
-  // factory method for creating blocks
-  static create() {
-    const canvas = CANVAS;
-
-    const width = random(Block.MIN_WIDTH, Block.MAX_WIDTH);
-    const height = random(Block.MIN_HEIGHT, Block.MAX_HEIGHT);
-
-    const x = random(0, canvas.width - width);
-    const y = Math.floor(0 - height * 2);
-
-    const damage = random(0, 3);
-
-    return new Block(x, y, width, height, damage);
   }
 }

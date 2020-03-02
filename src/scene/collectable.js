@@ -3,30 +3,27 @@
  *  Collectables are objects that are rendered on screen
  *  That when collided with, increase game score by an amount.
  */
-class Collectable extends GameObject {
+class Collectable extends Dodger.GameObject {
   static SIZE = 15;
   static COLOR = ['#402459', '#2ecc71'];
 
   static CollectableType = { Score: 0, Health: 1 };
 
   constructor(x, y, reward, type = Collectable.CollectableType.Score) {
-    console.log(type);
     super(
       x,
       y,
       Collectable.SIZE,
       Collectable.SIZE,
-      GameObject.Type.Collectable,
+      Dodger.GameObjectType.Collectable,
       Collectable.COLOR[type],
     );
 
-    this.x = x;
-    this.y = y;
     this.reward = reward;
 
     this.collected = false;
 
-    this.speedY = State.SPEED;
+    this.velocity.y = 4;
     this.cType = type;
   }
 
